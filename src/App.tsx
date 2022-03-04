@@ -1,13 +1,15 @@
 import { useState } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { Routes } from './routes'
 import firebase from './services/firebaseConnection'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-    </div>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   )
 }
 
