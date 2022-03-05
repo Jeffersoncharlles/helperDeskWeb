@@ -1,13 +1,14 @@
 import { Redirect, Route, RouteProps } from "react-router-dom"
 
 
-interface IRouterWrapper {
-    component: React.ElementType;
-    isPrivate: boolean
+interface IRouterWrapper extends RouteProps {
+    // component?: React.ElementType;
+    isPrivate?: boolean;
+
 }
 
 
-export const RouterWrapper = ({ component: Component, isPrivate, ...rest }: IRouterWrapper) => {
+export const RouterWrapper: React.FC<IRouterWrapper> = ({ isPrivate, ...rest }) => {
 
     const loading = false;
     const signed = false;
@@ -32,8 +33,6 @@ export const RouterWrapper = ({ component: Component, isPrivate, ...rest }: IRou
     return (
         <Route
             {...rest}
-            render={props => (<Component {...props} />)}
-
         />
     )
 }

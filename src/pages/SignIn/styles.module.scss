@@ -90,3 +90,40 @@
         }
     }
 }
+
+@media (max-width:950px) {
+    .container {
+        &_right {
+            &_card {
+                width: 85%;
+            }
+        }
+
+    }
+}
+
+@media (max-width:600px) {
+    .container {
+        flex-direction: column;
+
+        &_left {
+            width: 100%;
+            height: auto;
+            padding-bottom: 2rem;
+
+            // h1 {
+            //     display: none;
+            // }
+        }
+
+        &_right {
+            width: 100%;
+            height: auto;
+
+            &_card {
+                width: 85%;
+            }
+        }
+
+    }
+}
