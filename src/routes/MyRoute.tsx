@@ -1,4 +1,5 @@
 import { Redirect, Route, RouteProps } from "react-router-dom"
+import { useAuth } from "../contexts/auth";
 
 
 interface IRouterWrapper extends RouteProps {
@@ -9,9 +10,8 @@ interface IRouterWrapper extends RouteProps {
 
 
 export const RouterWrapper: React.FC<IRouterWrapper> = ({ isPrivate, ...rest }) => {
+    const { signed, loading } = useAuth();
 
-    const loading = false;
-    const signed = false;
 
     //carregando
     if (loading) {
