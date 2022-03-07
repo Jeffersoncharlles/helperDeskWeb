@@ -50,6 +50,32 @@ export const AuthProvider: React.FC = ({ children }) => {
             })
     }
 
+    const SignIn = async (email: string, password: string) => {
+        setIsAuth(true);
+        await firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(async ({ user }) => {
+                let uid = user?.uid;
+                const userProfile = await firebase.firestore()
+                    .collection('users')
+                    .doc(uid).get();
+                let data = {
+                    uid: user?.uid,
+                    name: userProfile.data()?.name,
+                    email: user?.email,
+                    avatarUrl: userProfile.data()?.avatarUrl
+                }
+                setUser(data);
+                storageSave(data)
+                setIsAuth(false);
+
+            })
+            .catch((error) => {
+                console.log(error)
+                setIsAuth(false)
+            })
+
+    }
+
     const storageSave = async (data: User) => {
         localStorage.setItem('@deskSystem', JSON.stringify(data))
     }
@@ -61,7 +87,13 @@ export const AuthProvider: React.FC = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ signed: !!user.email, user, loading, SignUp, signOut }}>
+        <AuthContext.Provider
+            value={{
+                signed: !!user.email, user, loading,
+                SignUp, signOut, SignIn
+            }}
+
+        >
             {children}
         </AuthContext.Provider>
     )

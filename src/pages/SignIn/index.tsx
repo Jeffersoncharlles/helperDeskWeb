@@ -4,6 +4,7 @@ import Lottie from 'react-lottie';
 import animationData from './animation.json';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useAuth } from '../../contexts/auth';
 
 const defaultOptions = {
     loop: true,
@@ -15,12 +16,16 @@ const defaultOptions = {
 };
 
 export const SignIn = () => {
+    const { SignIn } = useAuth();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     document.title = 'Signin || HelperDesk';
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (email !== '' && password !== '') {
+            SignIn(email, password)
+        }
     }
 
     return (

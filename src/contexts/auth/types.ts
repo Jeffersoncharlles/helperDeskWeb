@@ -5,6 +5,7 @@ export interface IAuthContext {
     loading: boolean;
     SignUp: (data: ISignUp) => Promise<void>;
     signOut: () => Promise<void>;
+    SignIn: (email: string, password: string) => Promise<void>;
 }
 
 export interface User {
