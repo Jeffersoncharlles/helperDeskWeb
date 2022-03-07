@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './styles.module.scss'
 
 import animationData from './animation.json';
+import { useAuth } from '../../contexts/auth';
 
 const defaultOptions = {
     loop: true,
@@ -16,6 +17,7 @@ const defaultOptions = {
 
 
 export const SignUp = () => {
+    const { SignUp } = useAuth();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
@@ -23,6 +25,10 @@ export const SignUp = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (name !== '' && email !== '' && password !== '') {
+            let data = { email, password, name }
+            SignUp(data);
+        }
     }
 
     return (
@@ -39,10 +45,10 @@ export const SignUp = () => {
             <section className={styles.container_right}>
                 <form className={styles.container_right_card} onSubmit={handleSubmit}>
                     <div className={styles.card_textfield}>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="nome">Nome</label>
                         <input
                             type="name"
-                            placeholder='Seu nome'
+                            //placeholder='Seu nome'
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
@@ -51,7 +57,7 @@ export const SignUp = () => {
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
-                            placeholder='email@email.com'
+                            // placeholder='email@email.com'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />

@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap');
 
-$bgColor: #EFEFEF;
+$bgColor400: #201b2c;
+$bgColor200: #2f2841;
+$bgColor100: #514869;
+$text1 : #f0ffffde;
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
 }
 
 *:focus {
@@ -14,13 +18,12 @@ $bgColor: #EFEFEF;
 
 html,
 body,
-#root {
-    height: 100%;
-}
+#root {}
 
 body {
     font: 1rem 'Roboto', sans-serif;
-    background: $bgColor;
+    background: $bgColor400;
+    color: $text1;
 
     a {
         text-decoration: none;

@@ -5,7 +5,7 @@ import { Routes } from './routes'
 import firebase from './services/firebaseConnection'
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <AuthProvider>
