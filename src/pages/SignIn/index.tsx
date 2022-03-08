@@ -1,11 +1,18 @@
 import styles from './styles.module.scss'
 
-import Lottie from 'react-lottie';
-import animationData from './animation.json';
+
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../../contexts/auth';
+import * as yup from 'yup';
 
+let schema = yup.object().shape({
+    email: yup.string().email().required(),
+    password: yup.string()
+})
+
+import Lottie from 'react-lottie';
+import animationData from './animation.json';
 const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -16,7 +23,7 @@ const defaultOptions = {
 };
 
 export const SignIn = () => {
-    const { SignIn } = useAuth();
+    const { SignIn, isAuth } = useAuth();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     document.title = 'Signin || HelperDesk';
@@ -29,7 +36,6 @@ export const SignIn = () => {
     }
 
     return (
-
         <main className={styles.container}>
             <section className={styles.container_left}>
                 <h1>HelperDesk <br /> </h1>
@@ -59,7 +65,7 @@ export const SignIn = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <button type='submit'>Login</button>
+                    <button type='submit'>{isAuth ? 'Carregando..' : 'Acessar'}</button>
                     <Link to="/register">Criar uma Conta</Link>
                 </form>
 

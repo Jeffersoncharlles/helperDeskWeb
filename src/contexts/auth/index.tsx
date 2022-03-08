@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import firebase from "../../services/firebaseConnection";
+import { configTost } from "./helpers";
 import { IAuthContext, ISignUp, User } from './types'
 
 
@@ -43,9 +45,11 @@ export const AuthProvider: React.FC = ({ children }) => {
                         setUser(data);
                         storageSave(data)
                         setIsAuth(false);
+                        toast.success('Bem vindo a plataforma!', configTost as any)
                     })
             }).catch((error) => {
                 console.log(error)
+                toast.error('Ops algo deu errado!', configTost as any)
                 setIsAuth(false);
             })
     }
@@ -67,10 +71,12 @@ export const AuthProvider: React.FC = ({ children }) => {
                 setUser(data);
                 storageSave(data)
                 setIsAuth(false);
+                toast.success('Bem vindo de volta!', configTost as any)
 
             })
             .catch((error) => {
                 console.log(error)
+                toast.error('Ops algo deu errado!', configTost as any)
                 setIsAuth(false)
             })
 
@@ -89,7 +95,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     return (
         <AuthContext.Provider
             value={{
-                signed: !!user.email, user, loading,
+                signed: !!user.email, user, loading, isAuth,
                 SignUp, signOut, SignIn
             }}
 

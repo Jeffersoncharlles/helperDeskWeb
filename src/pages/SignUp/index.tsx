@@ -17,7 +17,7 @@ const defaultOptions = {
 
 
 export const SignUp = () => {
-    const { SignUp } = useAuth();
+    const { SignUp, isAuth } = useAuth();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
@@ -71,7 +71,7 @@ export const SignUp = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <button type='submit'>Cadastrar</button>
+                    <button type='submit'>{isAuth ? 'Carregando..' : 'Cadastrar'}</button>
                     <Link to="/">Já tem uma conta? Entre</Link>
                 </form>
 
