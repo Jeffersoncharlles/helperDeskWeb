@@ -18,11 +18,11 @@ export const Header = () => {
                 <FiHome size={24} color="#fff" />
                 Chamados
             </Link>
-            <Link to="/clients">
+            <Link to="/customers">
                 <FiUser size={24} color="#fff" />
                 Clientes
             </Link>
-            <Link to="/settings">
+            <Link to="/profile">
                 <FiSettings size={24} color="#fff" />
                 Configurações
             </Link>
