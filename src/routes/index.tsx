@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Switch as Routers, Link, Redirect } from 'react-router-dom';
+import { Customers } from '../pages/Customers';
 import { Dashboard } from '../pages/Dashboard';
 import { Profile } from '../pages/Profile';
 
@@ -20,6 +21,7 @@ export const Routes = () => {
             <RouterWrapper exact path="/register" component={SignUp} />
             <RouterWrapper exact={true} path="/dashboard" component={Dashboard} isPrivate />
             <RouterWrapper exact={true} path="/profile" component={Profile} isPrivate />
+            <RouterWrapper exact={true} path="/customers" component={Customers} isPrivate />
         </Routers>
     )
 }

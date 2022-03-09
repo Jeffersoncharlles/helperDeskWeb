@@ -79,3 +79,49 @@ button {
         filter: brightness(0.8);
     }
 }
+
+.content {
+    display: flex;
+    background: $bgColor200;
+    border-radius: 4px;
+    padding: .8rem;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    &_form {
+        display: flex;
+        flex-direction: column;
+
+        img {
+            margin-bottom: 1rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        label {
+            margin-bottom: .5rem;
+            font-size: 1.4rem;
+        }
+
+        input,
+        textarea,
+        select {
+            margin-bottom: 1rem;
+            padding: .7rem;
+            border: 0;
+            border-radius: 4px;
+            max-width: 600px;
+            background: #514869;
+            color: #dddd;
+        }
+
+        input:disabled {
+            cursor: not-allowed;
+            color: rgb(149, 147, 147);
+        }
+
+        button {
+            max-width: 600px;
+        }
+    }
+}
