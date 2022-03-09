@@ -12,11 +12,11 @@ export const AuthProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<User>({} as User);
     const [isAuth, setIsAuth] = useState(false);
     const [loading, setLoading] = useState(true);
-
+    //==============================================================================//
     useEffect(() => {
         loadStorage();
     }, [])
-
+    //==============================================================================//
     const loadStorage = () => {
         const storageUser = localStorage.getItem('@deskSystem');
         if (storageUser) {
@@ -25,7 +25,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         }
         setLoading(false)
     }
-
+    //==============================================================================//
     const SignUp = async ({ email, password, name }: ISignUp) => {
         setIsAuth(true);
         await firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -53,7 +53,7 @@ export const AuthProvider: React.FC = ({ children }) => {
                 setIsAuth(false);
             })
     }
-
+    //==============================================================================//
     const SignIn = async (email: string, password: string) => {
         setIsAuth(true);
         await firebase.auth().signInWithEmailAndPassword(email, password)
@@ -81,22 +81,22 @@ export const AuthProvider: React.FC = ({ children }) => {
             })
 
     }
-
+    //==============================================================================//
     const storageSave = async (data: User) => {
         localStorage.setItem('@deskSystem', JSON.stringify(data))
     }
-
+    //==============================================================================//
     const signOut = async () => {
         await firebase.auth().signOut();
         localStorage.removeItem('@deskSystem')
         setUser({} as User)
     }
-
+    //==============================================================================//
     return (
         <AuthContext.Provider
             value={{
                 signed: !!user.email, user, loading, isAuth,
-                SignUp, signOut, SignIn
+                SignUp, signOut, SignIn, setUser, storageSave
             }}
 
         >
@@ -105,7 +105,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     )
 }
 
-
+//==============================================================================//
+//==============================================================================//
+//==============================================================================//
+//==============================================================================//
 export const useAuth = () => {
     const context = useContext(AuthContext);
     return context;

@@ -4,6 +4,7 @@ import styles from './styles.module.scss'
 
 export const Dashboard = () => {
     const { signOut } = useAuth();
+    document.title = 'Dashboard || HelperDesk';
 
     return (
         <div className="">
