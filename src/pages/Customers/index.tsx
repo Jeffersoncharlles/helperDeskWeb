@@ -43,7 +43,7 @@ export const Customers = () => {
     return (
         <>
             <Header />
-            <div className={styles.container}>
+            <main className={styles.container}>
                 <Title name="Clientes">
                     <FiUser size={24} />
                 </Title>
@@ -64,7 +64,7 @@ export const Customers = () => {
 
                 </section>
 
-            </div>
+            </main>
         </>
     );
 }

@@ -4,6 +4,8 @@ $bgColor400: #201b2c;
 $bgColor200: #2f2841;
 $bgColor100: #514869;
 $text1 : #f0ffffde;
+$text2: #2b134b;
+$contrabg:#77ffc0;
 
 * {
     margin: 0;
@@ -22,6 +24,7 @@ button {
 body {
     background: $bgColor400;
     color: $text1;
+    -webkit-font-smoothing: antialiased;
 }
 
 h1,
