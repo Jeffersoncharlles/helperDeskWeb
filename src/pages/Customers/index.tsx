@@ -9,6 +9,7 @@ import firebase from '../../services/firebaseConnection'
 import { toast } from 'react-toastify';
 import { configTost } from '../../contexts/auth/helpers';
 import { useState } from 'react';
+import { cnpjMask } from '../../utils/Mask';
 
 export const Customers = () => {
     const [nameFantasy, setNameFantasy] = useState('')
@@ -16,6 +17,7 @@ export const Customers = () => {
     const [address, setAddress] = useState('');
 
     document.title = 'Customers || HelperDesk';
+
 
     const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -54,7 +56,7 @@ export const Customers = () => {
 
 
                         <label htmlFor="CNPJ">CNPJ</label>
-                        <input type="text" value={cnpj} onChange={(e) => setCnpj(e.target.value)} />
+                        <input type="text" value={cnpj} onChange={(e) => setCnpj(cnpjMask(e.target.value))} />
 
                         <label htmlFor="Endereço">Endereço</label>
                         <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />

@@ -1,0 +1,98 @@
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+
+    th,
+    td {
+        padding: .62rem;
+        text-align: center;
+    }
+
+    caption {
+        font-size: 1.5rem;
+        margin: .5rem 0 .75rem;
+    }
+
+    th {
+        font-size: .85rem;
+        letter-spacing: .1rem;
+        text-transform: uppercase;
+    }
+
+    tr {
+        background-color: $bgColor200;
+        border: 1px solid $bgColor100;
+        padding: .35rem;
+    }
+
+    td {
+        .action {
+            border: 0;
+            padding: 5px;
+            margin-right: 2px;
+            align-items: center;
+            display: inline-block;
+
+            svg {
+                vertical-align: middle;
+            }
+        }
+
+        .badge {
+            padding: 3px;
+            border-radius: 3px;
+            color: $bgColor200;
+        }
+    }
+}
+
+@media screen and (max-width:600px) {
+    table {
+        border: 0;
+
+        //remove thead=======
+        caption {
+            font-size: 1.3rem;
+        }
+
+        thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
+        //============
+        //formatar por linha e colocar tudo na direita
+        tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            font-size: .8rem;
+            text-align: right;
+
+            &::before {
+                //pegando o atributo data-label e colocando na tela
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+}

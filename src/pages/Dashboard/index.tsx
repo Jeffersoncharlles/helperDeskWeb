@@ -3,11 +3,10 @@ import { FiEdit2, FiMessageSquare, FiPlus, FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { Title } from '../../components/Title';
-import { useAuth } from '../../contexts/auth';
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
 export const Dashboard = () => {
-    const [called, setCalled] = useState([1]);
+    const [called, setCalled] = useState([]);
     document.title = 'Dashboard || HelperDesk';
 
     return (

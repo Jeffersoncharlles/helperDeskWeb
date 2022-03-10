@@ -1,0 +1,36 @@
+@import '../../styles/global.scss';
+
+.container {
+    margin-left: 200px;
+    padding: 1px 1rem;
+}
+
+@media (max-width:700px) {
+    .container {
+        margin-left: 0;
+    }
+}
+
+.content_form {
+    textarea {
+        height: 140px;
+        resize: none;
+    }
+
+    input[type="radio"] {
+        margin: 1rem 0;
+        cursor: pointer;
+
+        &:not(:first-child) {
+            //aplicar em todos menos no primeiro
+            margin-left: 15px;
+        }
+    }
+
+    .status {
+        span {
+            padding-left: .5rem;
+            font-size: 1.5rem;
+        }
+    }
+}
