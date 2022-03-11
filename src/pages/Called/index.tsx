@@ -1,13 +1,25 @@
+import React, { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { Header } from '../../components/Header';
 import { Title } from '../../components/Title';
 import styles from './styles.module.scss';
 
 export const Called = () => {
+    const [topic, setTopic] = useState('Suporte')
+    const [status, setStatus] = useState('Aberto')
+    const [subject, setSubject] = useState('')
 
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+    }
+
+    const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setStatus(e.target.value)
+    }
+
+    const handleChangeSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTopic(e.target.value)
     }
 
     return (
@@ -25,7 +37,7 @@ export const Called = () => {
                             <option key={1} value={1}>Jefferson Charlles</option>
                         </select>
                         <label htmlFor="Assunto">Assunto</label>
-                        <select>
+                        <select value={topic} onChange={(e) => setTopic(e.target.value)}>
                             <option value="Suporte">Suporte</option>
                             <option value="Visita Técnica">Visita Técnica</option>
                             <option value="Financeiro">Financeiro</option>
@@ -37,6 +49,8 @@ export const Called = () => {
                                 type="radio"
                                 name="radio"
                                 value="Aberto"
+                                onChange={(e) => setStatus(e.target.value)}
+                                checked={status === 'Aberto'}
                             />
                             <span>Em Aberto</span>
 
@@ -44,6 +58,8 @@ export const Called = () => {
                                 type="radio"
                                 name="radio"
                                 value="Progresso"
+                                onChange={(e) => setStatus(e.target.value)}
+                                checked={status === 'Progresso'}
                             />
                             <span>Em Progresso</span>
 
@@ -51,13 +67,17 @@ export const Called = () => {
                                 type="radio"
                                 name="radio"
                                 value="Atendido"
+                                onChange={(e) => setStatus(e.target.value)}
+                                checked={status === 'Atendido'}
                             />
                             <span>Finalizado</span>
-                        </div>
+                        </div><br />
 
                         <label htmlFor="Complemento">Complemento</label>
                         <textarea
                             placeholder='Descreva seu problema (opcional).'
+                            value={subject}
+                            onChange={(e) => setSubject(e.target.value)}
                         />
 
                         <button type='submit'>Registrar</button>
