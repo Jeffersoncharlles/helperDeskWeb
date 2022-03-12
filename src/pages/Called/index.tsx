@@ -5,6 +5,7 @@ import { Title } from '../../components/Title';
 import { useAuth } from '../../contexts/auth';
 import styles from './styles.module.scss';
 import firebase from '../../services/firebaseConnection'
+import { toast } from 'react-toastify';
 
 interface ICustomers {
     id: string;
@@ -59,22 +60,39 @@ export const Called = () => {
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        await firebase.firestore().collection('calls')
+            .add({
+                created_at: new Date(),
+                client: customers[customerSelected].nameFantasy,
+                client_id: customers[customerSelected].id,
+                topic: topic,
+                status: status,
+                subject: subject,
+                user_id: user.uid
+            }).then(() => {
+                toast.success("Chamado criado com sucesso!!")
+                setSubject('')
+                setCustomerSelected(0);
+            }).catch((error) => {
+                toast.error("ocorreu um erro ao registar")
+            })
+
     }
 
-    const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setStatus(e.target.value)
-    }
+    // const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setStatus(e.target.value)
+    // }
 
-    const handleChangeSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTopic(e.target.value)
-    }
+    // const handleChangeSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setTopic(e.target.value)
+    // }
 
-    const handleChangeCustomers = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        //console.log('index do client selecionado: ', e.target.value);
-        //console.log('cliente selecionado', customers[Number(e.target.value)]);
-        setCustomerSelected(Number(e.target.value));
+    // const handleChangeCustomers = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    //     //console.log('index do client selecionado: ', e.target.value);
+    //     //console.log('cliente selecionado', customers[Number(e.target.value)]);
+    //     setCustomerSelected(Number(e.target.value));
 
-    }
+    // }
 
     return (
         <>
@@ -89,10 +107,14 @@ export const Called = () => {
 
 
                         <label htmlFor="Cliente">Cliente</label>
+
                         {loadingCustomers ? (
                             <input type="text" disabled value="carregando clientes..." />
                         ) : (
-                            <select value={customerSelected} onChange={handleChangeCustomers}>
+                            <select
+                                value={customerSelected}
+                                onChange={(e) => setCustomerSelected(Number(e.target.value))}
+                            >
                                 {customers.map((item, index) => {
                                     return (
                                         <option key={item.id} value={index}>
