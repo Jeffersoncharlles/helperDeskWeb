@@ -22,6 +22,9 @@
 - Typescript
 - React Router Dom v6
 - Toast
+- React Icons
+- React Lottie
+- Sass
 <!-- - Axios -->
 
 
