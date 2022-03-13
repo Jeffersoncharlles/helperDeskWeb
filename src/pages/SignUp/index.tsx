@@ -37,9 +37,9 @@ export const SignUp = () => {
             <section className={styles.container_left}>
                 <h1>Criar Cadastro <br /> </h1>
                 <div className={styles.container_left_animate}>
-                    <Lottie
+                    {/* <Lottie
                         options={defaultOptions}
-                    />
+                    /> */}
                 </div>
             </section>
             <section className={styles.container_right}>
