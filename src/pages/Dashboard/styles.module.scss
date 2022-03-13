@@ -22,8 +22,17 @@
         font-weight: 600;
         font-size: 1.4rem;
     }
+}
 
-
+.more {
+    margin: 1rem 0;
+    padding: .5rem 1rem;
+    border: 0;
+    font-size: 1rem;
+    height: 35px;
+    font-weight: 500;
+    background: $bgColor100;
+    color: $bgColor400;
 }
 
 .new {

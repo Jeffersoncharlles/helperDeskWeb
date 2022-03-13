@@ -5,12 +5,13 @@ const formatUSD = (price: number) => {
     }).format(price)
 }
 
-const formatDate = (date: string) => {
+const formatDate = (date: any) => {
     return new Date(date).toLocaleDateString('pt-BR', {
         day: '2-digit',
         month: 'long',
         year: 'numeric'
     })
+
 }
 
 export { formatUSD, formatDate }

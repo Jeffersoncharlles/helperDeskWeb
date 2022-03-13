@@ -17,7 +17,6 @@ interface ICalled {
     topic: string;
     status: string;
     subject: string;
-    user_id?: string;
 }
 
 const listRef = firebase.firestore().collection('calls')
@@ -28,7 +27,7 @@ export const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [loadingMore, setLoadingMore] = useState(false)
     const [isEmpty, setIsEmpty] = useState(false)
-    const [lasDocs, setLasDocs] = useState()
+    const [lastDocs, setLastDocs] = useState()
     document.title = 'Dashboard || HelperDesk';
 
     useEffect(() => {
@@ -66,18 +65,42 @@ export const Dashboard = () => {
                     client_id: doc.data().client_id,
                     created_at: doc.data().created_at,
                     status: doc.data().status,
-                    created_formatted: formatDate(doc.data().created_at.seconds * 1000 + doc.data().created_at.nanoseconds)//converter
+                    created_formatted: formatDate(doc.data().created_at.seconds * 1000 + doc.data().created_at.nanoseconds / 1000000)//converter
                 })
             })
             const lastDoc = snapshot.docs[snapshot.docs.length - 1]; //pegando ultimo item buscado
             setCalled(calls => [...calls, ...list])
             //pegando todos os chamado que ja tem , e se ele a carregou mais vai acrescentar mais
 
-            setLasDocs(lastDoc)//ultimo item buscado
+            setLastDocs(lastDoc)//ultimo item buscado
         } else {
             setIsEmpty(true);//ta vazio nao tem mais que buscar
         }
         setLoadingMore(false);
+    }
+
+    const handleMore = async () => {
+        setLoadingMore(true)
+        await listRef.startAfter(lastDocs).limit(5)
+            .get().then((snapshot) => {
+                updateState(snapshot)
+            }).catch()
+    }
+
+    if (loading) {
+        return (
+            <>
+                <Header />
+                <main className={styles.container}>
+                    <Title name='Atendimentos'>
+                        <FiMessageSquare size={24} />
+                    </Title>
+                    <section className={`${styles.content} ${styles.dashboard}`}>
+                        <span>Buscando Chamados</span>
+                    </section>
+                </main>
+            </>
+        )
     }
 
     return (
@@ -116,24 +139,48 @@ export const Dashboard = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td data-label="Cliente">Jefferson</td>
-                                    <td data-label="Assunto">Suporte</td>
-                                    <td data-label="Status">
-                                        <span className={styles.badge} style={{ backgroundColor: '#5cb85c' }}>Em Aberto</span>
-                                    </td>
-                                    <td data-label="Cadastrado">20/06/2022</td>
-                                    <td data-label="#">
-                                        <button className={styles.action} style={{ backgroundColor: '#3583f6' }}>
-                                            <FiSearch color='#fff' size={16} />
-                                        </button>
-                                        <button className={styles.action} style={{ backgroundColor: '#f6a935' }}>
-                                            <FiEdit2 color='#fff' size={16} />
-                                        </button>
-                                    </td>
-                                </tr>
+
+                                {called.map((item, index) => {
+                                    return (
+                                        <tr key={item.id}>
+                                            <td data-label="Cliente">{item.client}</td>
+                                            <td data-label="Assunto">{item.topic}</td>
+                                            <td data-label="Status">
+                                                <span
+                                                    className={styles.badge}
+                                                    style={{ backgroundColor: item.status === 'Aberto' ? '#5cb85c' : '#999' }}
+                                                >
+                                                    {item.status}
+                                                </span>
+                                            </td>
+                                            <td data-label="Cadastrado">{item.created_formatted}</td>
+                                            <td data-label="#">
+                                                <button
+                                                    className={styles.action}
+                                                    style={{ backgroundColor: '#3583f6' }}
+                                                    onClick={() => { }}
+                                                >
+                                                    <FiSearch color='#fff' size={16} />
+                                                </button>
+                                                <button
+                                                    className={styles.action}
+                                                    style={{ backgroundColor: '#f6a935' }}
+                                                    onClick={() => { }}
+                                                >
+                                                    <FiEdit2 color='#fff' size={16} />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+
                             </tbody>
                         </table>
+                        {loadingMore && <h3 style={{ marginTop: 15 }}>Buscando dados...</h3>}
+                        {//se nao tiver carregando mais e se nao tiver vazia
+                            !loadingMore && !isEmpty &&
+                            <button className={styles.more} onClick={handleMore}>Buscar Mais</button>
+                        }
                     </>
                 )
                 }

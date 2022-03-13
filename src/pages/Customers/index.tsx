@@ -56,7 +56,7 @@ export const Customers = () => {
 
 
                         <label htmlFor="CNPJ">CNPJ</label>
-                        <input type="text" value={cnpj} onChange={(e) => setCnpj(cnpjMask(e.target.value))} />
+                        <input placeholder='00.000.000/0000-00' type="text" value={cnpj} onChange={(e) => setCnpj(cnpjMask(e.target.value))} />
 
                         <label htmlFor="Endereço">Endereço</label>
                         <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
