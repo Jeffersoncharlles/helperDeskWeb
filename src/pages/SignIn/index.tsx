@@ -11,9 +11,22 @@ let schema = yup.object().shape({
     password: yup.string()
 })
 
+<<<<<<< HEAD
 
 // import animationData from './animation.json';
 
+=======
+// import Lottie from 'react-lottie';
+import animationData from './animation.json';
+const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+    }
+};
+>>>>>>> e907568be63f7ad522091840059c51f1a70e2c14
 
 export const SignIn = () => {
     const { SignIn, isAuth } = useAuth();
