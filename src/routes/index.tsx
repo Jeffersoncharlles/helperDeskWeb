@@ -1,3 +1,4 @@
+
 import { Switch as Routers } from 'react-router-dom';
 import { Called } from '../pages/Called';
 import { Customers } from '../pages/Customers';
@@ -7,13 +8,10 @@ import { Profile } from '../pages/Profile';
 import { SignIn } from '../pages/SignIn';
 import { SignUp } from '../pages/SignUp';
 
-
-
 // import { MainRouter } from './MainRouter';
 import { RouterWrapper } from './MyRoute'
 
 export const Routes = () => {
-
 
     return (
         <Routers>
@@ -24,6 +22,7 @@ export const Routes = () => {
             <RouterWrapper exact={true} path="/customers" component={Customers} isPrivate />
             <RouterWrapper exact={true} path="/new" component={Called} isPrivate />
             <RouterWrapper exact={true} path="/new/:postId" component={Called} isPrivate />
+            <RouterWrapper path="*" component={Called} />
         </Routers>
     )
 }

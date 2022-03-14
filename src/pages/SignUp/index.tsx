@@ -2,17 +2,9 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.scss'
 
-import animationData from './animation.json';
+//import animationData from './animation.json';
 import { useAuth } from '../../contexts/auth';
 
-const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-        preserveAspectRatio: 'xMidYMid slice'
-    }
-};
 
 
 export const SignUp = () => {
@@ -36,9 +28,7 @@ export const SignUp = () => {
             <section className={styles.container_left}>
                 <h1>Criar Cadastro <br /> </h1>
                 <div className={styles.container_left_animate}>
-                    {/* <Lottie
-                        options={defaultOptions}
-                    /> */}
+
                 </div>
             </section>
             <section className={styles.container_right}>
