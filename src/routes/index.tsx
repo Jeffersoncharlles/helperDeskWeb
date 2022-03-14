@@ -1,5 +1,6 @@
 
 import { Switch as Routers } from 'react-router-dom';
+import { ErrorPage } from '../components/ErrorPage';
 import { Called } from '../pages/Called';
 import { Customers } from '../pages/Customers';
 import { Dashboard } from '../pages/Dashboard';
@@ -22,7 +23,7 @@ export const Routes = () => {
             <RouterWrapper exact={true} path="/customers" component={Customers} isPrivate />
             <RouterWrapper exact={true} path="/new" component={Called} isPrivate />
             <RouterWrapper exact={true} path="/new/:postId" component={Called} isPrivate />
-            <RouterWrapper path="*" component={Called} />
+            <RouterWrapper path="*" component={ErrorPage} />
         </Routers>
     )
 }
