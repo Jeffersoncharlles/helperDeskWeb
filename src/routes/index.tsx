@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { BrowserRouter, Switch as Routers, Link, Redirect } from 'react-router-dom';
 import { Called } from '../pages/Called';
 import { Customers } from '../pages/Customers';
@@ -8,13 +7,10 @@ import { Profile } from '../pages/Profile';
 import { SignIn } from '../pages/SignIn';
 import { SignUp } from '../pages/SignUp';
 
-
-
 // import { MainRouter } from './MainRouter';
 import { RouterWrapper } from './MyRoute'
 
 export const Routes = () => {
-
 
     return (
         <Routers>
