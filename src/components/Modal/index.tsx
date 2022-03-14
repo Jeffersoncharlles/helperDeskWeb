@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import styles from './styles.module.scss'
-export const Modal = () => {
-
-    return (
-        <div className={styles.modal}>
-
-=======
 import { FiX } from 'react-icons/fi';
 import styles from './styles.module.scss'
 
@@ -65,7 +57,6 @@ export const Modal = ({ close, content }: IModal) => {
 
                 </section>
             </div>
->>>>>>> e907568be63f7ad522091840059c51f1a70e2c14
         </div>
     );
 }
