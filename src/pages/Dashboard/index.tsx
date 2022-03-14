@@ -7,6 +7,7 @@ import styles from './styles.module.scss';
 import firebase from '../../services/firebaseConnection'
 import { toast } from 'react-toastify';
 import { formatDate } from '../../utils/format';
+import { Modal } from '../../components/Modal';
 
 interface ICalled {
     id: string;
@@ -28,6 +29,8 @@ export const Dashboard = () => {
     const [loadingMore, setLoadingMore] = useState(false)
     const [isEmpty, setIsEmpty] = useState(false)
     const [lastDocs, setLastDocs] = useState()
+    const [showPostModal, setShowPostModal] = useState(false)
+    const [detail, setDetail] = useState<ICalled>()
     document.title = 'Dashboard || HelperDesk';
 
     useEffect(() => {
@@ -69,6 +72,7 @@ export const Dashboard = () => {
                 })
             })
             const lastDoc = snapshot.docs[snapshot.docs.length - 1]; //pegando ultimo item buscado
+
             setCalled(calls => [...calls, ...list])
             //pegando todos os chamado que ja tem , e se ele a carregou mais vai acrescentar mais
 
@@ -85,6 +89,11 @@ export const Dashboard = () => {
             .get().then((snapshot) => {
                 updateState(snapshot)
             }).catch()
+    }
+
+    const togglePostModal = (item: ICalled) => {
+        setShowPostModal(!showPostModal)//invertendo de true para false
+        setDetail(item);
     }
 
     if (loading) {
@@ -158,7 +167,7 @@ export const Dashboard = () => {
                                                 <button
                                                     className={styles.action}
                                                     style={{ backgroundColor: '#3583f6' }}
-                                                    onClick={() => { }}
+                                                    onClick={() => togglePostModal(item)}
                                                 >
                                                     <FiSearch color='#fff' size={16} />
                                                 </button>
@@ -184,6 +193,12 @@ export const Dashboard = () => {
                     </>
                 )
                 }
+                {showPostModal && (
+                    <Modal
+                        content={detail}
+                        close={togglePostModal}
+                    />
+                )}
             </main>
         </>
     );
