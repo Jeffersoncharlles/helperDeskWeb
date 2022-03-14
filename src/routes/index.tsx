@@ -23,7 +23,7 @@ export const Routes = () => {
             <RouterWrapper exact={true} path="/customers" component={Customers} isPrivate />
             <RouterWrapper exact={true} path="/new" component={Called} isPrivate />
             <RouterWrapper exact={true} path="/new/:postId" component={Called} isPrivate />
-            <RouterWrapper path="*" component={ErrorPage} />
+            <RouterWrapper exact={true} path="*" component={ErrorPage} />
         </Routers>
     )
 }
