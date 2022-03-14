@@ -13,7 +13,7 @@ interface ICalled {
 }
 interface IModal {
     content?: ICalled;
-    close?: (item: ICalled) => void;
+    close: (item: any) => void;
 }
 
 export const Modal = ({ close, content }: IModal) => {
@@ -29,20 +29,20 @@ export const Modal = ({ close, content }: IModal) => {
                     <h2>Detalhes do chamado</h2>
                     <div className={styles.modal_container_row}>
                         <span>
-                            Cliente: <a>{content?.client}</a>
+                            Cliente: <i>{content?.client}</i>
                         </span>
                     </div>
                     <div className={styles.modal_container_row}>
                         <span>
-                            Assunto: <a>{content?.topic}</a>
+                            Assunto: <i>{content?.topic}</i>
                         </span>
                         <span>
-                            Cadastrado em: <a>{content?.created_formatted}</a>
+                            Cadastrado em: <i>{content?.created_formatted}</i>
                         </span>
                     </div>
                     <div className={styles.modal_container_row}>
                         <span>
-                            Status: <a style={{ backgroundColor: content?.status === 'Aberto' ? '#5cb85c' : '#999', color: '#2b134b' }}>{content?.status}</a>
+                            Status: <i style={{ backgroundColor: content?.status === 'Aberto' ? '#5cb85c' : '#999', color: '#2b134b' }}>{content?.status}</i>
                         </span>
                     </div>
 

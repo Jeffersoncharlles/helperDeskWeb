@@ -6,6 +6,8 @@ import { useAuth } from '../../contexts/auth';
 import styles from './styles.module.scss';
 import firebase from '../../services/firebaseConnection'
 import { toast } from 'react-toastify';
+import { useHistory, useParams } from 'react-router-dom';
+import { configTost } from '../../contexts/auth/helpers';
 
 interface ICustomers {
     id: string;
@@ -13,12 +15,18 @@ interface ICustomers {
     address?: string;
     cnpj?: string;
 }
+type CalledIDCustomer = {
+    postId: string;
+};
 
 export const Called = () => {
+    const { postId } = useParams<CalledIDCustomer>();
+    const history = useHistory();
     const { user } = useAuth();
     const [customers, setCustomers] = useState<ICustomers[]>([])
     const [loadingCustomers, setLoadingCustomers] = useState(true)
     const [customerSelected, setCustomerSelected] = useState(0)
+    const [idCustomer, setIdCustomer] = useState(false)
     const [topic, setTopic] = useState('Suporte')
     const [status, setStatus] = useState('Aberto')
     const [subject, setSubject] = useState('')
@@ -48,6 +56,10 @@ export const Called = () => {
                 setCustomers(list)
                 setLoadingCustomers(false)
 
+                if (postId) {
+                    loadId(list);
+                }
+
             })
             .catch((error) => {
                 console.log('deu erro')
@@ -57,8 +69,50 @@ export const Called = () => {
             })
     }
 
+    const loadId = async (list: ICustomers[]) => {
+        await firebase.firestore().collection('calls')
+            .doc(postId)
+            .get()
+            .then((snapshot) => {
+                setTopic(snapshot.data()?.topic)
+                setStatus(snapshot.data()?.status)
+                setSubject(snapshot.data()?.subject)
+
+                let index = list.findIndex(item => item.id === snapshot.data()?.client_id)
+                setCustomerSelected(index);
+                setIdCustomer(true);
+
+            })
+            .catch((error) => {
+                console.log('deu erro')
+                setIdCustomer(false);
+            })
+    }
+
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if (idCustomer) {
+            await firebase.firestore().collection('calls')
+                .doc(postId)
+                .update({
+                    client: customers[customerSelected].nameFantasy,
+                    client_id: customers[customerSelected].id,
+                    topic,
+                    status,
+                    subject,
+                    user_id: user.uid
+                }).then(() => {
+                    toast.success("Atualizado com sucesso", configTost as any)
+                    setSubject('')
+                    setCustomerSelected(0);
+                    history.push('/dashboard')
+                }).catch((error) => {
+                    toast.error("ocorreu um erro ao registar", configTost as any)
+                })
+
+            return;
+        }
 
         await firebase.firestore().collection('calls')
             .add({
@@ -70,11 +124,11 @@ export const Called = () => {
                 subject: subject,
                 user_id: user.uid
             }).then(() => {
-                toast.success("Chamado criado com sucesso!!")
+                toast.success("Chamado criado com sucesso!!", configTost as any)
                 setSubject('')
                 setCustomerSelected(0);
             }).catch((error) => {
-                toast.error("ocorreu um erro ao registar")
+                toast.error("ocorreu um erro ao registar", configTost as any)
             })
 
     }

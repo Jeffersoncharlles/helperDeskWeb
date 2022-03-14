@@ -171,13 +171,13 @@ export const Dashboard = () => {
                                                 >
                                                     <FiSearch color='#fff' size={16} />
                                                 </button>
-                                                <button
+                                                <Link
                                                     className={styles.action}
                                                     style={{ backgroundColor: '#f6a935' }}
-                                                    onClick={() => { }}
+                                                    to={`/new/${item.id}`}
                                                 >
                                                     <FiEdit2 color='#fff' size={16} />
-                                                </button>
+                                                </Link>
                                             </td>
                                         </tr>
                                     )
