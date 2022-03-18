@@ -16,7 +16,7 @@ export const Routes = () => {
 
     return (
         <Routers>
-            <RouterWrapper exact path="/" component={SignIn} />
+            <RouterWrapper exact path="/helperDeskWeb/" component={SignIn} />
             <RouterWrapper exact path="/register" component={SignUp} />
             <RouterWrapper exact={true} path="/dashboard" component={Dashboard} isPrivate />
             <RouterWrapper exact={true} path="/profile" component={Profile} isPrivate />
