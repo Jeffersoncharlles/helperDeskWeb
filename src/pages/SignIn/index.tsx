@@ -11,16 +11,7 @@ let schema = yup.object().shape({
     password: yup.string()
 })
 
-// import Lottie from 'react-lottie';
-import animationData from './animation.json';
-const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-        preserveAspectRatio: 'xMidYMid slice'
-    }
-};
+
 
 export const SignIn = () => {
     const { SignIn, isAuth } = useAuth();
@@ -40,9 +31,7 @@ export const SignIn = () => {
             <section className={styles.container_left}>
                 <h1>HelperDesk <br /> </h1>
                 <div className={styles.container_left_animate}>
-                    {/* <Lottie
-                        options={defaultOptions}
-                    /> */}
+
                 </div>
             </section>
             <section className={styles.container_right}>
