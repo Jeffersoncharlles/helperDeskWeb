@@ -129,3 +129,20 @@ button {
         }
     }
 }
+
+// @mixin make-Color($val){
+//     @if $val == 'Aberto'{
+//         background: #5cb85c;
+//     }@else if $val == 'Progresso'{
+//         background: #999;
+//     }@else {
+//         background: #f65835;
+//     }
+// }
+
+// @for $i from 1 through 5 {
+//     .text-#{$i}{
+//         font-size: 15* $i;
+//     }
+// }
+
