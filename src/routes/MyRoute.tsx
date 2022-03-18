@@ -22,7 +22,7 @@ export const RouterWrapper: React.FC<IRouterWrapper> = ({ isPrivate, ...rest }) 
 
     //nao ta logado e a rota e privada
     if (!signed && isPrivate) {
-        return <Redirect to="/" />
+        return <Redirect to="/helperDeskWeb/" />
     }
 
     //ta logado e a rota nao e privada

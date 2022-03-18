@@ -7,7 +7,7 @@ export const ErrorPage = () => {
         <div className={styles.container}>
             <h2>Not Found 404...</h2>
             <p>
-                <Link to="/">Go to the home page</Link>
+                <Link to="/helperDeskWeb/">Go to the home page</Link>
             </p>
         </div>
     );
